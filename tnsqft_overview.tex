@@ -193,7 +193,18 @@ Closely related to the calculation of expectation values is the construction of 
 
 The third remarkable property is that we obtain an upper bound on the entropy of entanglement associated a region $\mathcal{R}$ in the network. This result may be argued as follows.  
 
-\paragraph{Tensor networks from hamiltonians}\hspace{-1em}.---
+\paragraph{Tensor networks from hamiltonians}\hspace{-1em}.---In this section we'll discuss a now-standard way to obtaining a tensor network state representation of the ground state and low-lying excitations of a complex quantum system. As we'll discuss, in the quantum field setting there are additional complications arising when removing (lattice) regulator. The discussion here is framed in the \emph{hamiltonian} setting: our input is the regulated \emph{quantum} hamiltonian for the system. We use as regulator the spatial lattice $L_a \equiv a\mathbb{Z}^D\subset \mathbb{R}^D$, with lattice spacing $a$. The discussion throughout this paper is illustrated in terms of the running example of $\phi^4$ theory; additional fields and fermions do not present any new major conceptual difficulties (beyond fermion doubling). To further simplify our discussion in this section we only consider this model in $(1+1)$ dimensions (the extension to higher dimensions is only sketched). 
+
+The hamiltonian of $\phi^4$ theory on a lattice with lattice spacing $a$ is expressible as 
+\begin{equation}
+	H_a = a\sum_{j\in L_a} \frac{\widehat{p}_j}{2a^{2}} + \frac{(\widehat{x}_j-\widehat{x}_{j+1})^2}{2a^2} + \frac{\mu_0^2}{2} \widehat{x}_j^2 + \frac{\lambda}{4!} \widehat{x}_j^4,
+\end{equation}
+where $[\widehat{x}_j, \widehat{p}_k] = i\delta_{jk}$. To a tensor-network practitioner the most natural way to approach the approximation of the ground state is to first make a guess $|\Phi_0\rangle$ for the ground state as a simple tensor network state and then to improve this guess. One tried and true approach to doing this is to use \emph{mean-field theory} to obtain $|\Phi_0\rangle$ as a trivial matrix product state and then to simulate its \emph{imaginary time evolution} 
+\begin{equation}
+	|\Phi(\beta)\rangle \equiv \frac{e^{-\beta H_a}|\Phi_0\rangle}{\|e^{-\beta H_a}|\Phi_0\rangle\|}.
+\end{equation}
+If $H$ has a spectral gap and if the initial condition $|\Phi(0)\rangle \equiv |\Phi_0\rangle$ has some overlap with the true ground state $|\Omega\rangle$, i.e., $\langle \Phi(0)|\Omega\rangle \not= 0$, then we obtain an exponentially improving approximation $|\Omega(\beta)\rangle$ to $|\Omega\rangle$.
+As we saw in the previous section, the Lie-Trotter expansion can be utilised to approximate $e^{-\beta H_a}$  with a tensor network. When this tensor network is contracted against the tensor network for a product state we obtain a matrix product state $|\Psi\rangle$ with bond dimension equal to $\text{const.}^{\text{\# of layers}}$:
 
 
 \paragraph{Tensor networks from path integrals}\hspace{-1em}.---
