@@ -220,17 +220,41 @@ however, everything we discuss here is valid in generality (in particular, every
 	\langle  T[\phi(x_1)\cdots \phi(x_n)] \rangle\equiv\\ \lim_{T\rightarrow \infty(1-i\epsilon)} \frac{\int \mathcal{D}\phi \, \phi(x_1)\cdots \phi(x_n)e^{i\int_{-T}^T d^4x\, \mathcal{L}}}{\int \mathcal{D}\phi\, e^{i\int_{-T}^T d^4x\, \mathcal{L}}}.
 \end{multline} 
 Before such a path integral can be evaluated --- or even approximated --- it is generally necessary to \emph{regulate} the theory by applying a cutoff $\Lambda$. Now, in the context of tensor networks and quantum information, the most natural regulator is the lattice, with lattice spacing $a = \frac{1}{\Lambda}$, and we don't hesitate to use it throughout. In this way we discretise our continuous field(s) $\phi(x)$ onto the integer lattice $a\mathbb{Z}^{D+1}$; we restrict our coordinates to elements of the form $x_\mu = an_\mu$, $n_\mu \in \mathbb{Z}^{D+1}$. Write the field evaluated at lattice points as $\phi_{n_{\mu}} = \phi(x_\mu)$; thus we discretise derivatives as $\partial_\mu \phi(x_\nu) \mapsto (\phi_{n_\nu + e_{\mu}} - \phi_{n_\nu})/a$,   where $e_\mu$ is the unit lattice vector in the direction $\mu$. Thus our potentially ill-defined path integral becomes the better-behaved iterated integral
-\begin{equation}\label{eq:wrcorr}
+\begin{equation}
 	\int \mathcal{D}\phi \mapsto \int [d\phi] \equiv \int \left(\prod_{n\in\mathbb{Z}^{D+1}} d\phi_n \right).
 \end{equation}
 A further important device that we also initially exploit is to make a Wick rotation of time $t\mapsto -i\beta$: this turns our path integral expression for the correlation functions into a statistical mechanical problem:
-\begin{equation}	
+\begin{equation}\label{eq:wrcorr}
 	\langle  \phi(x_{1}^E)\cdots \phi(x_n^E) \rangle\equiv \frac{1}{\mathcal{Z}}\int [d\phi] \, \phi_{m_1}\cdots \phi_{m_n} e^{-S},
 \end{equation} 
 where $\mathcal{Z} = \int [d\phi] \, e^{-S}$ and, e.g., $S = a^{D+1}\sum_{\langle m,n\rangle\in \mathbb{Z}^{D+1}} (\phi_m-\phi_n)^2/(2a^2) + \sum_{n} m^2\phi_n^2/2 + \lambda \phi_n^4/4!$.
 
 
-To practitioners in tensor networks an expression such as Eq.~(\ref{eq:wrcorr}) is strongly suggestive because we can introduce a special pure quantum state $|\Phi\rangle$ which encodes all the information we can extract from a partition function by taking the square root of the probabilities \cite{rudolph:2002a, aharonov:2003a}. The way this works is as follows: if we have a partition function $\mathcal{Z} = \sum_{j=1}^N e^{-E_j}$ for a system with $N$ configurations we introduce the quantum state $|\Phi\rangle \equiv \sum_{j=1}^N e^{-\frac12E_j}|j\rangle/\sqrt{\mathcal{Z}}$, where $|j\rangle$ is an orthonormal basis corresponding to the $N$ possible configurations of the classical system. 
+To practitioners in tensor networks an expression such as Eq.~(\ref{eq:wrcorr}) is rather suggestive; we can introduce a special pure quantum state $|\Phi\rangle$ which encodes all the information we can extract from a partition function. Suppose we have a classical system which can be in one of $N$ different configurations, $x = 1, 2, \ldots, N$. (One example to keep in mind is the classical Ising model on an $L\times L$ lattice, here $x$ runs over all the configurations of the spins, labelled from $1$ to $2^{L^2}$.) Write the hamiltonian as $H = \sum_{x=1}^N E_j(x) |x\rangle\langle x|$, where we exploit quantum notation for classical systems: they are, for us, simply systems diagonal in a given ``position'' basis. The thermal state for the system is simply $\rho = e^{-\beta H}/\mathcal{Z}$. The trick we exploit is to take the square root of the probabilities $p(x) = e^{-\beta E(x)}/\mathcal{Z}$ \cite{rudolph:2002a, aharonov:2003a} and build the \emph{pure} quantum state $|\Phi\rangle \equiv \sum_{x=1}^N e^{-\frac12E(x)}|x\rangle/\sqrt{\mathcal{Z}}$, where $|x\rangle$ is an orthonormal basis corresponding to the $N$ possible configurations of the classical system. The state $|\Phi\rangle$ contains all information about observables: suppose $O:\{1,2,\ldots, N\}\rightarrow \mathbb{C}$ is an observable for the classical system (e.g., a multi-point correlation function such as $\sigma_{j_1}\sigma_{j_2}\cdots \sigma_{j_N}$). We can build a quantum observable which gives us the same expectation values:
+\begin{equation}
+	\widehat{O} \equiv \sum_{x=1}^N O(x) |x\rangle\langle x|.
+\end{equation}
+We hence obtain $\langle \Phi|\widehat{O}|\Phi\rangle = \langle O\rangle$. This construction is easily extended to the case of imaginary time path integrals: so long as the integral does not have a sign problem the above construction goes through unmodified. 
+
+However, one might wonder whether this construction can be extended to deal with the case of arbitrary path integrals. The naive answer is no: if we just take the square roots of the integrand $e^{iS}$ in a path integral then the resulting state $|\Phi\rangle$, constructed as above, has the unfortunate property that $\langle \Phi| \widehat{O}|\Phi\rangle$ is independent of $|\Phi\rangle$!. However if we are willing to introduce an ancillary quantum spin we can make an analogous construction. Suppose we have a path integral expression of the form 
+\begin{equation}
+	\langle O \rangle = \frac{\sum_{x=1}^N O(x) e^{iS(x)}}{\sum_{x=1}^N e^{iS(x)}},
+\end{equation}
+where $S$ is the action and $O$ an observable. We can again construct a pure quantum state encoding all the information about arbitrary observables $O$ as follows:
+\begin{equation}\label{eq:pipurestate}
+	|\Phi\rangle = \frac{1}{\sqrt{2\mathcal{Z_+}}}\sum_{x=1}^N e^{\frac{i}{2}S(x)} |x\rangle|0\rangle + \frac{1}{\sqrt{2\mathcal{Z_-}}}\sum_{x=1}^N e^{-\frac{i}{2}S(x)} |x\rangle|1\rangle,
+\end{equation}
+where
+\begin{equation}
+	\mathcal{Z_\pm} = \sum_{x=1}^N e^{\pm iS(x)}.
+\end{equation}
+It is now possible to generalise the construction above to construct quantum operators $\widehat{O}$ whose expectation values give those of their corresponding classical counterparts $O$:
+\begin{equation}
+	\widehat{O} \equiv 2\sum_{x=1}^N O(x) |x\rangle\langle x|\otimes |1\rangle\langle 0|.
+\end{equation}
+The auxiliary spin here is thought of as indicating the arrow of time.
+
+The pure state Eq.~(\ref{eq:pipurestate}) is perfect for approximation via tensor network states. Indeed, we will go further: the principle contribution of this project is to promote tensor networks of the form Eq.~(\ref{eq:pipurestate}) to the status of a \emph{definition} for a class of path integrals. The justified of this idea will take us on a long journey.
 
 Remarkably, we can also realise $|\Phi\rangle$ as the \emph{ground state} of a natural hamiltonian \cite{ardonne:2004a, verstraete:2006a, perez-garcia:2008a, horava:2008a}. The key to this construction is to introduce a reversible markov chain $M$ which has $p_j \equiv  e^{-E_j}/\mathcal{Z}$ as its stationary distribution \cite{norris:1997a}, i.e., $\sum_{j=1}^N p_jM_{jk} = p_k$, $\forall k$. Reversibility is the condition that $p_j M_{jk} = p_kM_{kj}$, $\forall j,k$. This motivates us to introduce the  matrix with matrix elements:
 \begin{equation}
