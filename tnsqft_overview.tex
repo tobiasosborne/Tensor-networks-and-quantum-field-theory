@@ -1,4 +1,4 @@
-\documentclass[prl,twocolumn,lengthcheck,superscriptaddress]{revtex4-1}
+\documentclass[twocolumn,lengthcheck,superscriptaddress]{revtex4-1}
 
 \usepackage{amsmath}
 \usepackage{amsthm}
@@ -39,12 +39,13 @@
 \affiliation{Institut f\"ur Theoretische Physik, Leibniz Universit\"at Hannover, Appelstr. 2, 30167 Hannover, Germany}
 
 \begin{abstract}
-	Here we describe how tensor network states --- a quantum information theory inspired tool originally arising in the study of quantum spin systems --- can be used to understand the physics of quantum fields. In particular, we review the tensor network formalism and outline its application to the study of ground state physics and scattering amplitudes. We describe two approaches, one based on the Lie-Trotter expansion within the hamiltonian formalism, and a second based on the lagrangian formalism which represents the path integral as a tensor network. Our aim in this paper is to present recent developments in condensed matter theory with a quantum field theory audience in mind. 
+	Here we describe how tensor network states --- a quantum information theory inspired tool originally arising in the study of quantum spin systems --- can be used to understand the physics of quantum fields. In particular, we review the tensor network formalism and outline its application to the study of ground state physics and scattering amplitudes. We describe two approaches, one based on the Lie-Trotter expansion within the hamiltonian formalism, and a second based on the lagrangian formalism which represents the path integral as a tensor network. We find, exploiting the second approach, that all scattering amplitudes are determined by a special convex set. Our aim in this paper is to present recent developments in condensed matter theory with a quantum field theory audience in mind. 
 \end{abstract}
 
 \maketitle
 
-\paragraph{Introduction }\hspace{-1em}.---Quantum field theory is now understood as an effective theory describing the large scale low energy physics \cite{wilson:1975a,wilson:1974a}. By exploiting the correspondence between a statistical physics system at criticality and a quantum field Wilson in one fell swoop resolved all the troubling ``infinities'' plaguing quantum field theory. And so it is that quantum field theory has become a tool par excellence in physics; to understand the large-scale effective physics of any system we need only identify the fixed point --- often uniquely defined by the symmetries of the system --- to which it belongs and, often enough, the resulting QFT describing that situation is amenable to perturbation theory allowed us to deploy the apparatus of Feynman diagrams. 
+\section{Introduction }
+Quantum field theory is now understood as an effective theory describing the large scale low energy physics \cite{wilson:1975a,wilson:1974a}. By exploiting the correspondence between a statistical physics system at criticality and a quantum field Wilson in one fell swoop resolved all the troubling ``infinities'' plaguing quantum field theory. And so it is that quantum field theory has become a tool par excellence in physics; to understand the large-scale effective physics of any system we need only identify the fixed point --- often uniquely defined by the symmetries of the system --- to which it belongs and, often enough, the resulting QFT describing that situation is amenable to perturbation theory allowed us to deploy the apparatus of Feynman diagrams. 
 
 Tensor network papers: \cite{perez-garcia:2006a}\cite{orus:2013a, evenbly:2011a, evenbly:2009a}\cite{verstraete:2004a}
 \cite{vidal:2007a}\cite{levin:2007a}\cite{gu:2009a}
@@ -88,7 +89,11 @@ In this sense tensor-network methods have become a natural alternative to the pa
 
 The purpose of this letter is to interpret QFT in the language of tensor networks with a view to formalising possible approaches to studying holographic dualities and the calculation of  To this end we describe two natural approaches to studying the statics and dynamics of QFT via TNS, namely, in the hamiltonian setting familiar to condensed matter theory and a second approach by directly representing the full path integral as a TNS. We then argue how to obtain continuum limits and briefly 
 
-\paragraph{What is a tensor network?}\hspace{-1em}---Tensor networks provide an economic framework to parametrise tensors with many indices. Here we provide a brief overview of the tensor network formalism and sketch some calculational techniques. For some recent reviews of this material see, e.g., \cite{orus:2013a, evenbly:2011a, evenbly:2009a}.
+\section{What is a tensor network?}
+
+Tensor networks provide an economic framework to parametrise tensors with many indices. Here we provide a brief overview of the tensor network formalism and sketch some calculational techniques. For some recent reviews of this material see, e.g., \cite{orus:2013a, evenbly:2011a, evenbly:2009a}.
+
+\subsection{Tensor diagrams}
 
 We begin our discussion by considering $n$-index tensors: these are, for us, nothing more than collections $\psi$ of $d_1d_2\cdots d_k$ complex numbers $\psi_{j_1j_2\cdots j_n}$, where $j_k = 1, 2, \ldots, d_k$ and  $d_k$ is the dimension of the index. While we sometimes use the ``upstairs'' and ``downstairs'' notation for indices --- basically in order to unclutter our expressions --- this should not be interpreted as implying that the tensor transforms in any particular way under Lorentz transformations (whose action is not even defined here).
 
@@ -104,6 +109,8 @@ The contraction of the indices of two tensors is then represented by joining the
 \begin{center}
 \includegraphics{tns2.pdf}
 \end{center}
+
+\subsection{Tensor networks}
 A \emph{tensor network} is then the tensor $\psi$ associated with a diagram, actually a \emph{graph} $G$, consisting of a collection of tensors, represented as \emph{vertices}, whose indices are contracted according to the \emph{contraction pattern} described by the edges of the graph. The result is a tensor with a number of indices given by the external or ``dangling legs'' of the diagram. 
 
 The canonical example of a tensor network is the \emph{matrix product state} tensor:
@@ -114,7 +121,7 @@ The canonical example of a tensor network is the \emph{matrix product state} ten
 Calculating the value of a tensor network for a given configuration $j_1j_2\cdots j_n$ of the external legs is called \emph{contracting} a tensor network. The problem of contracting, or even approximating the contraction of, an arbitrary tensor network is, in general, \emph{hard}: even \emph{planar} tensor networks can be arbitrarily difficult \cite{schuch:2007a}. Tensor networks are, in general, useful only when they have some additional structure, such as short-ranged correlations (more on this later), topological simplicity, i.e., containing only a few loops, or causal structure, e.g., the tensors are isometries. 
 
 
-\paragraph{Operations on tensor networks}\hspace{-1em}.---There are a couple of basic operations one can perform on a tensor network to obtain (sometimes simpler) new networks. The first operation is \emph{partial contraction}: here a collection of vertices and their corresponding tensors are identified and the indices corresponding to all the edges connecting these vertices are contracted. The original tensors are then replaced by the resulting amalgamation: 
+\section{Operations on tensor networks}There are a couple of basic operations one can perform on a tensor network to obtain (sometimes simpler) new networks. The first operation is \emph{partial contraction}: here a collection of vertices and their corresponding tensors are identified and the indices corresponding to all the edges connecting these vertices are contracted. The original tensors are then replaced by the resulting amalgamation: 
 \begin{center}
 \includegraphics{partialcont.pdf}
 \end{center}
@@ -163,13 +170,14 @@ which is a tensor network of $mn$ degree-$4$ tensors. Graphically this is repres
 We've thus reduced the contraction of a single degree $2n$ tensor to contracting a network of smaller tensors. In general the difficulty of these two different tasks is roughly equivalent, however, there are cases where the Lie-Trotter network can be exploited to develop useful approximation methods
 
 
-\paragraph{Tensor network states}\hspace{-1em}.---Tensor network states (TNS) are quantum states of a many body quantum system associated with a tensor network. The systems we typically think about are quantum spin systems comprised of $n$ distinguishable quantum spins with local hilbert spaces $\mathcal{H}_j$, $j = 1, 2, \ldots, n$; the total hilbert space is then $\mathcal{H}\cong \bigotimes_{j=1}^{n} \mathcal{H}_j$. It is common to assume that $\mathcal{H}_j$ is finite dimensional, with dimension $d_j$, although there is no fundamental reason preventing everything from straightforwardly applying to infinite dimensional systems. An arbitrary state $|\psi\rangle$ of $\mathcal{H}$ can be written as
+\section{Tensor network states}
+Tensor network states (TNS) are quantum states of a many body quantum system associated with a tensor network. The systems we typically think about are quantum spin systems comprised of $n$ distinguishable quantum spins with local hilbert spaces $\mathcal{H}_j$, $j = 1, 2, \ldots, n$; the total hilbert space is then $\mathcal{H}\cong \bigotimes_{j=1}^{n} \mathcal{H}_j$. It is common to assume that $\mathcal{H}_j$ is finite dimensional, with dimension $d_j$, although there is no fundamental reason preventing everything from straightforwardly applying to infinite dimensional systems. An arbitrary state $|\psi\rangle$ of $\mathcal{H}$ can be written as
 \begin{equation}
 	|\psi\rangle = \sum_{j_1 = 1}^{d_1}\cdots \sum_{j_{n} = 1}^{d_{n} } \psi_{j_1j_2 \cdots j_{n}}|j_1\rangle \cdots |j_{n}\rangle,
 \end{equation} 
 where $|j_k\rangle$ is an arbitrary orthonormal basis for $\mathcal{H}_j$. The state $|\psi\rangle$ is encoded in the $d_1d_2\cdots d_n$ components of the $n$-index tensor $\psi_{j_1j_2 \cdots j_{n}}$.  When the dangling legs of a tensor $\psi$ are associated with an orthonormal basis of a quantum spin system we obtain a \emph{tensor network state}.
 
-\paragraph{Basic properties of tensor network states}\hspace{-1em}.---The tensor network formalism exposes some very powerful structural information about quantum states. 
+\subsection{Basic properties of tensor network states}The tensor network formalism exposes some very powerful structural information about quantum states. 
 
 The first property is that a tensor network state is always manifestly a \emph{state}. This is an extremely useful property not shared by other representations (e.g., a truncated perturbation series around some mixed state does not usually determine a positive state).
 
@@ -193,7 +201,8 @@ Closely related to the calculation of expectation values is the construction of 
 
 The third remarkable property is that we obtain an upper bound on the entropy of entanglement associated a region $\mathcal{R}$ in the network. This result may be argued as follows.  
 
-\paragraph{Tensor networks from hamiltonians}\hspace{-1em}.---In this section we'll discuss a now-standard way to obtaining a tensor network state representation of the ground state and low-lying excitations of a complex quantum system. As we'll discuss, in the quantum field setting there are additional complications arising when removing (lattice) regulator. The discussion here is framed in the \emph{hamiltonian} setting: our input is the regulated \emph{quantum} hamiltonian for the system. We use as regulator the spatial lattice $L_a \equiv a\mathbb{Z}^D\subset \mathbb{R}^D$, with lattice spacing $a$. The discussion throughout this paper is illustrated in terms of the running example of $\phi^4$ theory; additional fields and fermions do not present any new major conceptual difficulties (beyond fermion doubling). To further simplify our discussion in this section we only consider this model in $(1+1)$ dimensions (the extension to higher dimensions is only sketched). 
+\section{Tensor networks from hamiltonians}\hspace{-1em}
+In this section we'll discuss a now-standard way to obtaining a tensor network state representation of the ground state and low-lying excitations of a complex quantum system. As we'll discuss, in the quantum field setting there are additional complications arising when removing (lattice) regulator. The discussion here is framed in the \emph{hamiltonian} setting: our input is the regulated \emph{quantum} hamiltonian for the system. We use as regulator the spatial lattice $L_a \equiv a\mathbb{Z}^D\subset \mathbb{R}^D$, with lattice spacing $a$. The discussion throughout this paper is illustrated in terms of the running example of $\phi^4$ theory; additional fields and fermions do not present any new major conceptual difficulties (beyond fermion doubling). To further simplify our discussion in this section we only consider this model in $(1+1)$ dimensions (the extension to higher dimensions is only sketched). 
 
 The hamiltonian of $\phi^4$ theory on a lattice with lattice spacing $a$ is expressible as 
 \begin{equation}
@@ -207,7 +216,7 @@ If $H$ has a spectral gap and if the initial condition $|\Phi(0)\rangle \equiv |
 As we saw in the previous section, the Lie-Trotter expansion can be utilised to approximate $e^{-\beta H_a}$  with a tensor network. When this tensor network is contracted against the tensor network for a product state we obtain a matrix product state $|\Psi\rangle$ with bond dimension equal to $\text{const.}^{\text{\# of layers}}$:
 
 
-\paragraph{Tensor networks from path integrals}\hspace{-1em}.---
+\section{Tensor networks from path integrals}
 
 Here we must cite lifschitz theories; ardonne; Horava
 
@@ -230,13 +239,23 @@ A further important device that we also initially exploit is to make a Wick rota
 where $\mathcal{Z} = \int [d\phi] \, e^{-S}$ and, e.g., $S = a^{D+1}\sum_{\langle m,n\rangle\in \mathbb{Z}^{D+1}} (\phi_m-\phi_n)^2/(2a^2) + \sum_{n} m^2\phi_n^2/2 + \lambda \phi_n^4/4!$.
 
 
-To practitioners in tensor networks an expression such as Eq.~(\ref{eq:wrcorr}) is rather suggestive; we can introduce a special pure quantum state $|\Phi\rangle$ which encodes all the information we can extract from a partition function. Suppose we have a classical system which can be in one of $N$ different configurations, $x = 1, 2, \ldots, N$. (One example to keep in mind is the classical Ising model on an $L\times L$ lattice, here $x$ runs over all the configurations of the spins, labelled from $1$ to $2^{L^2}$.) Write the hamiltonian as $H = \sum_{x=1}^N E_j(x) |x\rangle\langle x|$, where we exploit quantum notation for classical systems: they are, for us, simply systems diagonal in a given ``position'' basis. The thermal state for the system is simply $\rho = e^{-\beta H}/\mathcal{Z}$. The trick we exploit is to take the square root of the probabilities $p(x) = e^{-\beta E(x)}/\mathcal{Z}$ \cite{rudolph:2002a, aharonov:2003a} and build the \emph{pure} quantum state $|\Phi\rangle \equiv \sum_{x=1}^N e^{-\frac12E(x)}|x\rangle/\sqrt{\mathcal{Z}}$, where $|x\rangle$ is an orthonormal basis corresponding to the $N$ possible configurations of the classical system. The state $|\Phi\rangle$ contains all information about observables: suppose $O:\{1,2,\ldots, N\}\rightarrow \mathbb{C}$ is an observable for the classical system (e.g., a multi-point correlation function such as $\sigma_{j_1}\sigma_{j_2}\cdots \sigma_{j_N}$). We can build a quantum observable which gives us the same expectation values:
+To practitioners in tensor networks an expression such as Eq.~(\ref{eq:wrcorr}) is rather suggestive because we can introduce a special pure quantum state $|\Phi\rangle$ which encodes all the information we can extract from a partition function. To explain this construction suppose we have a classical system which can be in one of $N$ different configurations, $x = 1, 2, \ldots, N$. (One example to keep in mind is the classical Ising model on an $L\times L$ lattice, here $x$ runs over all the configurations of the spins, labelled from $1$ to $2^{L^2}$.) Write the hamiltonian as $H = \sum_{x=1}^N E_j(x) |x\rangle\langle x|$, where we exploit quantum notation for classical systems: they are, for us, simply systems diagonal in a given ``position'' basis. The thermal state for the system is simply $\rho = e^{-\beta H}/\mathcal{Z}$. The trick we exploit is to take the square root of the probabilities $p(x) = e^{-\beta E(x)}/\mathcal{Z}$ \cite{rudolph:2002a, aharonov:2003a} and build the \emph{pure} quantum state $|\Phi\rangle \equiv \sum_{x=1}^N e^{-\frac12E(x)}|x\rangle/\sqrt{\mathcal{Z}}$, where $|x\rangle$ is an orthonormal basis corresponding to the $N$ possible configurations of the classical system. The state $|\Phi\rangle$ encodes the expectation value of any observable: suppose $O:\{1,2,\ldots, N\}\rightarrow \mathbb{C}$ is an observable for the classical system (e.g., a multi-point correlation function such as $\sigma_{j_1}\sigma_{j_2}\cdots \sigma_{j_N}$). We can build a quantum observable which gives us the same expectation values:
 \begin{equation}
 	\widehat{O} \equiv \sum_{x=1}^N O(x) |x\rangle\langle x|.
 \end{equation}
-We hence obtain $\langle \Phi|\widehat{O}|\Phi\rangle = \langle O\rangle$. This construction is easily extended to the case of imaginary time path integrals: so long as the integral does not have a sign problem the above construction goes through unmodified. 
+We hence obtain $\langle \Phi|\widehat{O}|\Phi\rangle = \langle O\rangle$. 
 
-However, one might wonder whether this construction can be extended to deal with the case of arbitrary path integrals. The naive answer is no: if we just take the square roots of the integrand $e^{iS}$ in a path integral then the resulting state $|\Phi\rangle$, constructed as above, has the unfortunate property that $\langle \Phi| \widehat{O}|\Phi\rangle$ is independent of $|\Phi\rangle$!. However if we are willing to introduce an ancillary quantum spin we can make an analogous construction. Suppose we have a path integral expression of the form 
+This construction is easily extended to the case of imaginary time path integrals: so long as the integral does not have a sign problem the above construction goes through unmodified: when we apply the procedure described here to a Wick-rotated path integral we obtain the following state of a lattice of a $(D+1)$-dimensional spatial lattice of harmonic oscillators 
+\begin{equation}
+	|\Phi\rangle \equiv \frac{1}{\mathcal{Z}}\int [d\phi] \,e^{-\frac{1}{2}S[\phi]}  |\boldsymbol{\phi}\rangle,
+\end{equation}
+where
+\begin{equation}
+	|\boldsymbol{\phi}\rangle \equiv \bigotimes_{x_\mu\in a\mathbb{Z}^{D+1}} |\phi(x_\mu)\rangle,
+\end{equation}
+and $|\phi(x)\rangle$ is an improper \emph{position eigenstate} of the harmonic oscillator for site $x_\mu$ localised at the harmonic oscillator position $\phi(x_\mu)$.
+
+One might wonder whether this construction can be extended to deal with the case of arbitrary path integrals. The naive answer is no: if we just take the square roots of the integrand $e^{iS}$ in a path integral then the resulting state $|\Phi\rangle$, constructed as above, has the unfortunate property that $\langle \Phi| \widehat{O}|\Phi\rangle$ is independent of $|\Phi\rangle$! However if we are willing to introduce an ancillary quantum spin we can make an analogous construction. Suppose we have a path integral expression of the form 
 \begin{equation}
 	\langle O \rangle = \frac{\sum_{x=1}^N O(x) e^{iS(x)}}{\sum_{x=1}^N e^{iS(x)}},
 \end{equation}
@@ -254,9 +273,13 @@ It is now possible to generalise the construction above to construct quantum ope
 \end{equation}
 The auxiliary spin here is thought of as indicating the arrow of time.
 
-The pure state Eq.~(\ref{eq:pipurestate}) is perfect for approximation via tensor network states. Indeed, we will go further: the principle contribution of this project is to promote tensor networks of the form Eq.~(\ref{eq:pipurestate}) to the status of a \emph{definition} for a class of path integrals. The justified of this idea will take us on a long journey.
+The pure state Eq.~(\ref{eq:pipurestate}) is perfect for approximation via tensor network states. Indeed, we will go further: the principle contribution of this project is to promote tensor networks of the form Eq.~(\ref{eq:pipurestate}) to the status of a \emph{definition} for a class of path integrals. The justification of this idea will take us on a long journey.
 
-Remarkably, we can also realise $|\Phi\rangle$ as the \emph{ground state} of a natural hamiltonian \cite{ardonne:2004a, verstraete:2006a, perez-garcia:2008a, horava:2008a}. The key to this construction is to introduce a reversible markov chain $M$ which has $p_j \equiv  e^{-E_j}/\mathcal{Z}$ as its stationary distribution \cite{norris:1997a}, i.e., $\sum_{j=1}^N p_jM_{jk} = p_k$, $\forall k$. Reversibility is the condition that $p_j M_{jk} = p_kM_{kj}$, $\forall j,k$. This motivates us to introduce the  matrix with matrix elements:
+
+
+
+\section{Parent hamiltonians and convex sets}
+Remarkably, we can also realise $|\Phi\rangle$ as the \emph{ground state} of a natural hamiltonian \cite{ardonne:2004a, verstraete:2006a, perez-garcia:2008a, horava:2008a}. The key to this construction is to introduce a reversible markov chain $M$ which has $p_j \equiv  e^{-E_j}/\mathcal{Z}$ as its stationary distribution \cite{norris:1997a}, i.e., $\sum_{j=1}^N p_jM_{jk} = p_k$, $\forall k$. Reversibility is the condition that $p_j M_{jk} = p_kM_{kj}$, $\forall j,k$. This motivates us to introduce the  matrix $K$ with matrix elements:
 \begin{equation}
 	K_{jk} \equiv \sqrt{p_j} M_{jk} \frac{1}{\sqrt{p_k}}.
 \end{equation}
@@ -271,18 +294,9 @@ Let $F$ be an operator which flips classical configurations, a \emph{flip operat
 	\widehat{M} = \sum_{j\not=k} c_{jk}\langle j|F|k\rangle
 \end{equation} 
 
-When we apply the procedure described here to our Wick rotated path integral we obtain the following state of a lattice of a $(D+1)$-dimensional spatial lattice of harmonic oscillators 
-\begin{equation}
-	|\Phi\rangle \equiv \frac{1}{\mathcal{Z}}\int [d\phi] \,e^{-\frac{S}{2}}  |\boldsymbol{\phi}\rangle,
-\end{equation}
-where
-\begin{equation}
-	|\boldsymbol{\phi}\rangle 
-\end{equation}
+\section{Reflection positivity and analytic continuation}
 
-\paragraph{Reflection positivity and analytic continuation}\hspace{-1em}.---
-
-\paragraph{Conclusions}\hspace{-1em}.---The
+\section{Conclusions}The
 
 \bibliography{tnspi}
 
