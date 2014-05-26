@@ -236,7 +236,7 @@ A further important device that we also initially exploit is to make a Wick rota
 \begin{equation}\label{eq:wrcorr}
 	\langle  \phi(x_{1}^E)\cdots \phi(x_n^E) \rangle\equiv \frac{1}{\mathcal{Z}}\int [d\phi] \, \phi_{m_1}\cdots \phi_{m_n} e^{-S},
 \end{equation} 
-where $\mathcal{Z} = \int [d\phi] \, e^{-S}$ and, e.g., $S = a^{D+1}\sum_{\langle m,n\rangle\in \mathbb{Z}^{D+1}} (\phi_m-\phi_n)^2/(2a^2) + \sum_{n} m^2\phi_n^2/2 + \lambda \phi_n^4/4!$.
+where $\mathcal{Z} = \int [d\phi] \, e^{-S}$ and, e.g., $S = a^{D+1}\left(\sum_{\langle m,n\rangle\in \mathbb{Z}^{D+1}} (\phi_m-\phi_n)^2/(2a^2) + \sum_{n} m^2\phi_n^2/2 + \lambda \phi_n^4/4!\right)$.
 
 
 To practitioners in tensor networks an expression such as Eq.~(\ref{eq:wrcorr}) is rather suggestive because we can introduce a special pure quantum state $|\Phi\rangle$ which encodes all the information we can extract from a partition function. To explain this construction suppose we have a classical system which can be in one of $N$ different configurations, $x = 1, 2, \ldots, N$. (One example to keep in mind is the classical Ising model on an $L\times L$ lattice, here $x$ runs over all the configurations of the spins, labelled from $1$ to $2^{L^2}$.) Write the hamiltonian as $H = \sum_{x=1}^N E_j(x) |x\rangle\langle x|$, where we exploit quantum notation for classical systems: they are, for us, simply systems diagonal in a given ``position'' basis. The thermal state for the system is simply $\rho = e^{-\beta H}/\mathcal{Z}$. The trick we exploit is to take the square root of the probabilities $p(x) = e^{-\beta E(x)}/\mathcal{Z}$ \cite{rudolph:2002a, aharonov:2003a} and build the \emph{pure} quantum state $|\Phi\rangle \equiv \sum_{x=1}^N e^{-\frac12E(x)}|x\rangle/\sqrt{\mathcal{Z}}$, where $|x\rangle$ is an orthonormal basis corresponding to the $N$ possible configurations of the classical system. The state $|\Phi\rangle$ encodes the expectation value of any observable: suppose $O:\{1,2,\ldots, N\}\rightarrow \mathbb{C}$ is an observable for the classical system (e.g., a multi-point correlation function such as $\sigma_{j_1}\sigma_{j_2}\cdots \sigma_{j_N}$). We can build a quantum observable which gives us the same expectation values:
@@ -253,7 +253,26 @@ where
 \begin{equation}
 	|\boldsymbol{\phi}\rangle \equiv \bigotimes_{x_\mu\in a\mathbb{Z}^{D+1}} |\phi(x_\mu)\rangle,
 \end{equation}
-and $|\phi(x)\rangle$ is an improper \emph{position eigenstate} of the harmonic oscillator for site $x_\mu$ localised at the harmonic oscillator position $\phi(x_\mu)$.
+and $|\phi(x)\rangle$ is an improper \emph{position eigenstate} of the harmonic oscillator for site $x_\mu$ localised at the harmonic oscillator position $\phi(x_\mu)$. We can obtain this state by applying the (exponential of the) operator 
+\begin{equation}
+	\widehat{S} \equiv \frac{a^{D-1}}{2}\sum_{\langle m,n\rangle} (\widehat{\phi}_m-\widehat{\phi}_n)^2 + a^{D+1}\sum_{n} \frac{m^2}{2}\widehat{\phi}_n^2 + \frac{\lambda}{4!} \widehat{\phi}_n^4,
+\end{equation}
+with 
+\begin{equation}
+	\widehat{\phi}_n  \equiv \phi(an)|\boldsymbol{\phi}\rangle,
+\end{equation}
+to the \emph{momentum zero} state
+\begin{equation}
+	|\Omega\rangle \equiv \bigotimes_{x_\mu\in a\mathbb{Z}^{D+1}} |\omega\rangle,
+\end{equation}
+where
+\begin{equation}
+	|\omega\rangle \text{``$\equiv$''} \int d\phi\, |\phi\rangle,
+\end{equation}
+is the improper momentum eigenstate. That is, we have that
+\begin{equation}
+	|\Phi\rangle \propto e^{-\frac12 \widehat{S}}|\Omega\rangle. 
+\end{equation}
 
 One might wonder whether this construction can be extended to deal with the case of arbitrary path integrals. The naive answer is no: if we just take the square roots of the integrand $e^{iS}$ in a path integral then the resulting state $|\Phi\rangle$, constructed as above, has the unfortunate property that $\langle \Phi| \widehat{O}|\Phi\rangle$ is independent of $|\Phi\rangle$! However if we are willing to introduce an ancillary quantum spin we can make an analogous construction. Suppose we have a path integral expression of the form 
 \begin{equation}
