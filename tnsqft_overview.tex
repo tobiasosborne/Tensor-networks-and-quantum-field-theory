@@ -217,8 +217,7 @@ As we saw in the previous section, the Lie-Trotter expansion can be utilised to 
 
 
 \section{Tensor networks from path integrals}
-
-Here we must cite lifschitz theories; ardonne; Horava
+In this section we describe how to construct a special quantum state, the \emph{quantum Lifschitz state}, which encodes all of the $n$-particle scattering amplitudes for a given quantum (field) theory. This idea traces its origin back at least to the work of Rudolph and Ta-Shma and Aharonov \cite{rudolph:2002a, aharonov:2003a} and has found recent applications by Ardonne in condensed matter theory where it is known as a \emph{quantum Lifschitz theory} \cite{ardonne:2004a}, and later in the study of quantum gravity by Ho\v{r}ava \cite{horava:2009a,horava:2008a}. In contrast to the aforementioned applications in condensed matter theory and quantum gravity we are not proposing the construction of new exactly solvable theories, rather, we exploit the quantum Lifschitz construction to encode the full path integral as a pure quantum state which we then subsequently approximate as a tensor network.
 
 The basic input to any calculation in QFT is the lagrangian $\mathcal{L}$. To keep a concrete example in mind think of $\phi^4$ theory in $D+1$ dimensions:
 \begin{equation}
@@ -228,24 +227,31 @@ however, everything we discuss here is valid in generality (in particular, every
 \begin{multline}	
 	\langle  T[\phi(x_1)\cdots \phi(x_n)] \rangle\equiv\\ \lim_{T\rightarrow \infty(1-i\epsilon)} \frac{\int \mathcal{D}\phi \, \phi(x_1)\cdots \phi(x_n)e^{i\int_{-T}^T d^4x\, \mathcal{L}}}{\int \mathcal{D}\phi\, e^{i\int_{-T}^T d^4x\, \mathcal{L}}}.
 \end{multline} 
-Before such a path integral can be evaluated --- or even approximated --- it is generally necessary to \emph{regulate} the theory by applying a cutoff $\Lambda$. Now, in the context of tensor networks and quantum information, the most natural regulator is the lattice, with lattice spacing $a = \frac{1}{\Lambda}$, and we don't hesitate to use it throughout. In this way we discretise our continuous field(s) $\phi(x)$ onto the integer lattice $a\mathbb{Z}^{D+1}$; we restrict our coordinates to elements of the form $x_\mu = an_\mu$, $n_\mu \in \mathbb{Z}^{D+1}$. Write the field evaluated at lattice points as $\phi_{n_{\mu}} = \phi(x_\mu)$; thus we discretise derivatives as $\partial_\mu \phi(x_\nu) \mapsto (\phi_{n_\nu + e_{\mu}} - \phi_{n_\nu})/a$,   where $e_\mu$ is the unit lattice vector in the direction $\mu$. Thus our potentially ill-defined path integral becomes the better-behaved iterated integral
+Before such a path integral can be evaluated --- or even approximated --- it is generally necessary to \emph{regulate} the theory by applying a cutoff $\Lambda$. Now, in the context of tensor networks and quantum information, the most natural regulator is the lattice, with lattice spacing $a = \frac{1}{\Lambda}$, and we don't hesitate to use it throughout. In this way we discretise our continuous field(s) $\phi(x)$ onto the integer lattice $a\mathbb{Z}^{D+1}$; we restrict our coordinates to lattice points $x_\mu = an_\mu$, $n_\mu \in \mathbb{Z}^{D+1}$. Write the field evaluated at lattice points as $\phi_{n_{\mu}} = \phi(x_\mu)$; thus we discretise derivatives as $\partial_\mu \phi(x_\nu) \mapsto (\phi_{n_\nu + e_{\mu}} - \phi_{n_\nu})/a$,   where $e_\mu$ is the unit lattice vector in the direction $\mu$. Thus our potentially ill-defined path integral is replaced, after discretisation, by the better-behaved iterated integral
 \begin{equation}
 	\int \mathcal{D}\phi \mapsto \int [d\phi] \equiv \int \left(\prod_{n\in\mathbb{Z}^{D+1}} d\phi_n \right).
 \end{equation}
 A further important device that we also initially exploit is to make a Wick rotation of time $t\mapsto -i\beta$: this turns our path integral expression for the correlation functions into a statistical mechanical problem:
 \begin{equation}\label{eq:wrcorr}
-	\langle  \phi(x_{1}^E)\cdots \phi(x_n^E) \rangle\equiv \frac{1}{\mathcal{Z}}\int [d\phi] \, \phi_{m_1}\cdots \phi_{m_n} e^{-S},
+	\langle  \phi(x_{1})\cdots \phi(x_n) \rangle\equiv \frac{1}{\mathcal{Z}}\int [d\phi] \, \phi_{m_1}\cdots \phi_{m_n} e^{-S},
 \end{equation} 
-where $\mathcal{Z} = \int [d\phi] \, e^{-S}$ and, e.g., $S = a^{D+1}\left(\sum_{\langle m,n\rangle\in \mathbb{Z}^{D+1}} (\phi_m-\phi_n)^2/(2a^2) + \sum_{n} m^2\phi_n^2/2 + \lambda \phi_n^4/4!\right)$.
+where $x_1 = a m_1, x_2 = a m_2, \ldots, x_1 = a m_n$, $\mathcal{Z} = \int [d\phi] \, e^{-S}$ and, e.g., $S = a^{D+1}\big(\sum_{\langle m,n\rangle\in \mathbb{Z}^{D+1}} (\phi_m-\phi_n)^2/(2a^2) + \sum_{n} m^2\phi_n^2/2 + \lambda \phi_n^4/4!\big)$.
 
 
-To practitioners in tensor networks an expression such as Eq.~(\ref{eq:wrcorr}) is rather suggestive because we can introduce a special pure quantum state $|\Phi\rangle$ which encodes all the information we can extract from a partition function. To explain this construction suppose we have a classical system which can be in one of $N$ different configurations, $x = 1, 2, \ldots, N$. (One example to keep in mind is the classical Ising model on an $L\times L$ lattice, here $x$ runs over all the configurations of the spins, labelled from $1$ to $2^{L^2}$.) Write the hamiltonian as $H = \sum_{x=1}^N E_j(x) |x\rangle\langle x|$, where we exploit quantum notation for classical systems: they are, for us, simply systems diagonal in a given ``position'' basis. The thermal state for the system is simply $\rho = e^{-\beta H}/\mathcal{Z}$. The trick we exploit is to take the square root of the probabilities $p(x) = e^{-\beta E(x)}/\mathcal{Z}$ \cite{rudolph:2002a, aharonov:2003a} and build the \emph{pure} quantum state $|\Phi\rangle \equiv \sum_{x=1}^N e^{-\frac12E(x)}|x\rangle/\sqrt{\mathcal{Z}}$, where $|x\rangle$ is an orthonormal basis corresponding to the $N$ possible configurations of the classical system. The state $|\Phi\rangle$ encodes the expectation value of any observable: suppose $O:\{1,2,\ldots, N\}\rightarrow \mathbb{C}$ is an observable for the classical system (e.g., a multi-point correlation function such as $\sigma_{j_1}\sigma_{j_2}\cdots \sigma_{j_N}$). We can build a quantum observable which gives us the same expectation values:
+To practitioners in tensor networks an expression such as Eq.~(\ref{eq:wrcorr}) is rather suggestive. This is because we can introduce a special pure quantum state $|\Phi\rangle$, which we call the \emph{quantum Lifschitz state}, encoding all the information we can extract from a partition function. To explain this construction suppose we have a classical system which can be in one of $N$ different configurations, $x = 1, 2, \ldots, N$. (One example to keep in mind is the classical Ising model on an $L\times L$ lattice, here $x$ runs over all the configurations, labelled in lexicographic order from $1$ to $2^{L^2}$, of the spins.) Write the hamiltonian as $H = \sum_{x=1}^N E_j(x) |x\rangle\langle x|$, where we exploit quantum notation for classical systems: they are, for us, simply systems diagonal in a given ``position'' basis. The thermal state for the system is simply $\rho = e^{-\beta H}/\mathcal{Z}$. The trick is now to take the square root of the probabilities $p(x) = e^{-\beta E(x)}/\mathcal{Z}$ \cite{rudolph:2002a, aharonov:2003a} and build the \emph{pure} quantum state 
+\begin{equation}
+|\Phi\rangle \equiv \frac{1}{\sqrt{\mathcal{Z}}}\sum_{x=1}^N e^{-\frac12\beta E(x)}|x\rangle,
+\end{equation}
+where $|x\rangle$ is an orthonormal basis corresponding to the $N$ possible configurations of the classical system. The state $|\Phi\rangle$ encodes the expectation value of any observable. To see this suppose $O:\{1,2,\ldots, N\}\rightarrow \mathbb{C}$ is an observable for the classical system (e.g., a multi-point correlation function such as $\sigma_{j_1}\sigma_{j_2}\cdots \sigma_{j_N}$). We can build a quantum observable which gives us the same expectation values:
 \begin{equation}
 	\widehat{O} \equiv \sum_{x=1}^N O(x) |x\rangle\langle x|.
 \end{equation}
-We hence obtain $\langle \Phi|\widehat{O}|\Phi\rangle = \langle O\rangle$. 
+We hence obtain 
+\begin{equation}
+\langle \Phi|\widehat{O}|\Phi\rangle = \langle O\rangle \equiv \frac{1}{\mathcal{Z}}\sum_{x=1}^N O(x) e^{-\beta E(x)}. 
+\end{equation}
 
-This construction is easily extended to the case of imaginary time path integrals: so long as the integral does not have a sign problem the above construction goes through unmodified: when we apply the procedure described here to a Wick-rotated path integral we obtain the following state of a lattice of a $(D+1)$-dimensional spatial lattice of harmonic oscillators 
+This construction is easily extended to encode imaginary time path integrals. As long as the action is real valued the above construction goes through unmodified: when we apply the procedure described here to a Wick-rotated path integral we obtain the following state of a lattice of a $(D+1)$-dimensional spatial lattice of harmonic oscillators 
 \begin{equation}
 	|\Phi\rangle \equiv \frac{1}{\mathcal{Z}}\int [d\phi] \,e^{-\frac{1}{2}S[\phi]}  |\boldsymbol{\phi}\rangle,
 \end{equation}
@@ -261,7 +267,7 @@ with
 \begin{equation}
 	\widehat{\phi}_n  \equiv \phi(an)|\boldsymbol{\phi}\rangle,
 \end{equation}
-to the \emph{momentum zero} state
+to the \emph{momentum-zero} state
 \begin{equation}
 	|\Omega\rangle \equiv \bigotimes_{x_\mu\in a\mathbb{Z}^{D+1}} |\omega\rangle,
 \end{equation}
@@ -274,7 +280,8 @@ is the improper momentum eigenstate. That is, we have that
 	|\Phi\rangle \propto e^{-\frac12 \widehat{S}}|\Omega\rangle. 
 \end{equation}
 
-One might wonder whether this construction can be extended to deal with the case of arbitrary path integrals. The naive answer is no: if we just take the square roots of the integrand $e^{iS}$ in a path integral then the resulting state $|\Phi\rangle$, constructed as above, has the unfortunate property that $\langle \Phi| \widehat{O}|\Phi\rangle$ is independent of $|\Phi\rangle$! However if we are willing to introduce an ancillary quantum spin we can make an analogous construction. Suppose we have a path integral expression of the form 
+
+One might wonder whether this construction can be extended to deal with the case of arbitrary path integrals. The naive answer is obviously no: if we just take the square roots of the integrand $e^{iS}$ in a path integral then the resulting state $|\Phi\rangle$, constructed as above, has the unfortunate property that $\langle \Phi| \widehat{O}|\Phi\rangle$ is independent of $|\Phi\rangle$! However if we are willing to introduce an ancillary quantum spin we can make an analogous construction. Suppose we have a path integral expression of the form 
 \begin{equation}
 	\langle O \rangle = \frac{\sum_{x=1}^N O(x) e^{iS(x)}}{\sum_{x=1}^N e^{iS(x)}},
 \end{equation}
@@ -304,14 +311,16 @@ Remarkably, we can also realise $|\Phi\rangle$ as the \emph{ground state} of a n
 \end{equation}
 Because of the reversibility condition we find that $K$ is real and symmetric, i.e., hermitian. Further, we have that operator $\widehat{K} \equiv  \sum_{j,k=1}^N K_{jk}|k\rangle \langle j|$ has $|\Phi\rangle$ as an eigenvector corresponding to its largest eigenvalue. We obtain our desired hamiltonian by writing $\widehat{H} \equiv \mathbb{I} - \widehat{K}$, this operator has $|\Phi\rangle$ as a ground state with eigenvalue $0$.
 
-Given a probability distribution of exponential form, i.e., $p_j \equiv  e^{-E_j}/\mathcal{Z}$, there is a special reversible Markov chain having $p_j$ as its stationary distribution, namely, the Metropolis algorithm \cite{metropolis:1953a}. To define this Markov chain we introduce the quantity
+Given a probability distribution of exponential form, i.e., $p_j \equiv  e^{-E_j}/\mathcal{Z}$, $j=1, 2, \ldots, N$, there is a special reversible Markov chain having $p_j$ as its stationary distribution, namely, the Metropolis algorithm \cite{metropolis:1953a}. To define this Markov chain we introduce the quantity
 \begin{equation}
 	c_{jk} \equiv \min\{1, e^{-E_j+E_k}\}.
 \end{equation}
-Let $F$ be an operator which flips classical configurations, a \emph{flip operator}. In our cases it is convenient to let $F$ be a permutation of $j=1, 2, \ldots, N$. We then use the flip operator to construct
+Let $F$ be a \emph{flip operator} which flips classical configurations, i.e.\ a permutation of $j=1, 2, \ldots, N$. We then use the flip operator to construct
 \begin{equation}
-	\widehat{M} = \sum_{j\not=k} c_{jk}\langle j|F|k\rangle
+	\widehat{M} = \sum_{j\not=k} c_{jk}\langle j|F|k\rangle |j\rangle \langle k| + \sum_{j} |j\rangle \langle j|.
 \end{equation} 
+
+
 
 \section{Reflection positivity and analytic continuation}
 
