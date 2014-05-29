@@ -296,12 +296,39 @@ Let $F$ be an operator which flips classical configurations, a \emph{flip operat
 
 \section{Reflection positivity and analytic continuation}
 
-\section{Conclusions}The
+\section{Conclusions}
+The
 
 \bibliography{tnspi}
 
-\end{document}
-
 \widetext
 \appendix
-\section{$\star$-vector spaces and the Gram-Schmidt procedure}\label{app:ags}
+\section{A generalised Metropolis algorithm for the Lifschitz state}\label{app:metro}
+In this appendix we write out some of the calculations involved in constructing the parent hamiltonian for the Lifschitz state.
+
+The Lifschitz state for a classical hamiltonian of the form $H = \sum_{x=1}^N E(x)|x\rangle\langle x|$ is given by
+\begin{equation}
+	|\Phi\rangle \equiv \sum_{x=1}^N e^{-\frac12E(x)}|x\rangle/\sqrt{\mathcal{Z}}.
+\end{equation}
+
+Recall that, associated to any flip operator $F$ we have the operator
+\begin{equation}
+	\widehat{M} = \sum_{x\not=y} c_{xy}\langle x|F|y\rangle |x\rangle\langle y| - \sum_{},
+\end{equation} 
+where
+\begin{equation}
+	c_{jk} \equiv \min\{1, e^{-E(x)+E(y)}\}.
+\end{equation}
+
+When we act on $|\Phi\rangle$ with $\widehat{M}$ we obtain
+\begin{equation}
+	\begin{split}
+		\widehat{M}|\Phi\rangle &= \frac{1}{\sqrt{Z}}\sum_{xy} e^{-\frac12E(y)}c_{xy}\langle x|F|y\rangle |x\rangle  \\
+		&= \frac{1}{\sqrt{Z}}\sum_{xy} \min\{e^{-\frac12E(y)+\frac12E(x)}, e^{-\frac12E(x)+\frac12E(y)}\}\langle x|F|y\rangle e^{-\frac12E(x)}|x\rangle
+	\end{split}
+\end{equation}
+
+
+\end{document}
+
+
