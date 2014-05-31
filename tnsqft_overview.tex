@@ -345,14 +345,31 @@ Recall that, associated to any flip operator $F$ we have the operator
 \end{equation} 
 where
 \begin{equation}
-	c_{jk} \equiv \min\{1, e^{-E(x)+E(y)}\}.
+	c_{xy} \equiv \min\{1, e^{E(x)-E(y)}\}.
 \end{equation}
+Using the $M$ operator we build the $K$ operator
+\begin{equation}
+	K_{xy} \equiv \sqrt{p_x} M_{xy} \frac{1}{\sqrt{p_y}},
+\end{equation}
+which, explicitly, is given by, 
+\begin{equation}
+	K_{xy} \equiv  \min\{e^{-\frac12 (E(x)-E(y))}, e^{\frac12 (E(x)-E(y))}\} \langle x|F|y\rangle.
+\end{equation}
+Note that $E(x)-E(y)$ is antisymmetric, and hence 
+\begin{equation}
+	\min\{e^{-\frac12 (E(x)-E(y))}, e^{\frac12 (E(x)-E(y))}\} = \begin{cases}
+		1 &\quad x = y \\
+		e^{-\frac12 (E(x)-E(y))} &\quad x < y \\
+		e^{-\frac12 (E(x)-E(y))} &\quad x > y.
+	\end{cases}
+\end{equation}
+
 
 When we act on $|\Phi\rangle$ with $\widehat{M}$ we obtain
 \begin{equation}
 	\begin{split}
-		\widehat{M}|\Phi\rangle &= \frac{1}{\sqrt{Z}}\sum_{xy} e^{-\frac12E(y)}c_{xy}\langle x|F|y\rangle |x\rangle  \\
-		&= \frac{1}{\sqrt{Z}}\sum_{xy} \min\{e^{-\frac12E(y)+\frac12E(x)}, e^{-\frac12E(x)+\frac12E(y)}\}\langle x|F|y\rangle e^{-\frac12E(x)}|x\rangle
+		\widehat{M}|\Phi\rangle &= \frac{1}{\sqrt{Z}}\sum_{xy} e^{-\frac12E(y)}c_{xy}\langle x|F|y\rangle |x\rangle +  \\
+		&= \frac{1}{\sqrt{Z}}\sum_{xy} \min\{e^{-\frac12E(y)+\frac12E(x)}, e^{-\frac12E(x)+\frac12E(y)}\}\langle x|F|y\rangle e^{-\frac12E(x)}|x\rangle +
 	\end{split}
 \end{equation}
 
