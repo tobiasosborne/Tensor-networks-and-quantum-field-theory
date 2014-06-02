@@ -331,54 +331,64 @@ The
 
 \widetext
 \appendix
-\section{Parent hamiltonians for the Lifschitz state via the generalised Metropolis algorithm}\label{app:metro}
+\section{Parent hamiltonians for the Lifschitz state}\label{app:metro}
 In this appendix we write out some of the calculations involved in constructing a parent hamiltonian for the Lifschitz state.
 
-The Lifschitz state for a classical hamiltonian of the form $H = \sum_{x=1}^N E(x)|x\rangle\langle x|$ is given by
+\subsection{The Metropolis algorithm}
+The Metropolis algorithm is a markov chain which has the gibbs distribution for a classical hamiltonian of the form $H = \sum_{x=1}^N E(x)|x\rangle\langle x|$ as its stationary distribution. To build the markov matrix for this chain we introduce a \emph{flip process} with transition probabilities $f(y|x)$ which induces transitions between the states of the chain. The transition probabilities of the markov chain are now given by
+\begin{equation}
+	P(y|x) \equiv \begin{cases} 1 - \sum_{y\not = x} p(y|x) &\quad y=x \\
+	p(y|x) &\quad y \not= x,\end{cases}
+\end{equation}
+where
+\begin{equation}
+	p(y|x) \equiv  \min\left\{f(y|x), f(x|y)e^{-\beta (E(y)-E(x))}\right\}.
+\end{equation}
+We now check that this markov chain indeed has the gibbs distribution as its fixed point:
+\begin{equation}
+	\begin{split}
+		\sum_{x = 1}^N P(y|x) e^{-\beta E(x)} &= \left(1 - \sum_{z\not = y} p(z|y)\right) e^{-\beta E(y)} + \sum_{x \not= y} p(y|x) e^{-\beta E(x)} \\
+		&= \left(1 - \sum_{z\not = y} p(z|y)\right) e^{-\beta E(y)} + \sum_{x \not= y} e^{-\beta E(x)}\min\left\{f(y|x), f(x|y)e^{-\beta (E(y)-E(x))}\right\} \\
+		&= \left(1 - \sum_{z\not = y} p(z|y)\right) e^{-\beta E(y)} + \sum_{x \not= y} \min\left\{f(y|x)e^{-\beta E(x)}, f(x|y)e^{-\beta E(y)}\right\} \\
+		&= e^{-\beta E(y)} - \sum_{x\not = y} \min\left\{f(x|y)e^{-\beta E(y)}, f(y|x)e^{-\beta E(x)}\right\}  + \sum_{x \not= y} \min\left\{f(y|x)e^{-\beta E(x)}, f(x|y)e^{-\beta E(y)}\right\} \\
+		&= e^{-\beta E(y)}.
+ 	\end{split}
+\end{equation}
+The markov matrix for the metropolis algorithm has matrix elements
+\begin{equation}
+	M_{xy} \equiv P(y|x).
+\end{equation}
+
+\subsection{Parent hamiltonians via the metropolis hamiltonian}
+The Lifschitz state for $H$ is given by
 \begin{equation}
 	|\Phi\rangle \equiv \sum_{x=1}^N e^{-\frac12E(x)}|x\rangle/\sqrt{\mathcal{Z}}.
 \end{equation}
 (We assume that the eigenvalues $E(x)$ of $H$ are arranged in increasing order.)
 
-Recall that, associated to any flip operator $F$ we have the operator
+Using the markov matrix $M$ for the metropolis algorithm we build the $K$ operator
 \begin{equation}
-	\widehat{M} = \sum_{x\not=y} c_{xy}\langle x|F|y\rangle |x\rangle\langle y| - \sum_{},
-\end{equation} 
+	\widehat{K} \equiv \sum_{x,y=1}^N e^{-\frac{\beta}{2}(E(x)-E(y))} P(y|x) |y\rangle\langle x|.
+\end{equation}
+
+
+\subsection{Parent hamiltonians via generalised metropolis operators}
+In this subsection we describe an alternative procedure to directly construct parent hamiltonians. The idea here is to exploit the representation of the Lifschitz state as
+\begin{equation}
+	|\phi\rangle \propto e^{-\frac{\beta}{2} H}|+\rangle,
+\end{equation}
 where
 \begin{equation}
-	c_{xy} \equiv \min\{1, e^{E(x)-E(y)}\}.
+	|+\rangle \equiv \sum_{x=1}^N |x\rangle.
 \end{equation}
-Using the $M$ operator we build the $K$ operator
+Now it is easy to find operators which annihilate $|+\rangle$, e.g., just choose
 \begin{equation}
-	K_{xy} \equiv \sqrt{p_x} M_{xy} \frac{1}{\sqrt{p_y}},
+	P \equiv \mathbb{I} - |+\rangle\langle+|.
 \end{equation}
-whose matrix elements are, explicitly,  
+Using such an operator we can easily build a positive hermitian operator annihilating $|\Phi\rangle$:
 \begin{equation}
-	K_{xy} \equiv  \min\{e^{-\frac12 (E(x)-E(y))}, e^{\frac12 (E(x)-E(y))}\} \langle x|F|y\rangle.
+	\widehat{K} \equiv  \left(e^{-\frac{\beta}{2} H} P e^{\frac{\beta}{2} H} \right)^\dag\left(e^{-\frac{\beta}{2} H} P e^{\frac{\beta}{2} H} \right).
 \end{equation}
-Thus we have 
-\begin{equation}
-	\widehat{K} \equiv  \sum_{x,y=1}^N K_{xy}|y\rangle \langle x|
-\end{equation}
-
-Note that $E(x)-E(y)$ is antisymmetric, and hence 
-\begin{equation}
-	\min\{e^{-\frac12 (E(x)-E(y))}, e^{\frac12 (E(x)-E(y))}\} = \begin{cases}
-		1 &\quad x = y \\
-		e^{-\frac12 (E(y)-E(x))} &\quad x < y \\
-		e^{-\frac12 (E(x)-E(y))} &\quad x > y.
-	\end{cases}
-\end{equation}
-
-
-When we act on $|\Phi\rangle$ with $\widehat{K}$ we obtain
-\begin{equation}
-	\begin{split}
-		\widehat{K}|\Phi\rangle &= \sum_{x,y=1}^N e^{-\frac12E(x)}\min\{e^{-\frac12 (E(x)-E(y))}, e^{\frac12 (E(x)-E(y))}\} \langle x|F|y\rangle |y\rangle \\
-		&= \sum_{x,y=1}^N \min\{e^{-E(x)+E(y)}, 1\} \langle x|F|y\rangle e^{-\frac12E(y)}|y\rangle
-	\end{split}
-\end{equation}
-
 
 \end{document}
 
