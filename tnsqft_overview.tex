@@ -227,7 +227,7 @@ however, everything we discuss here is valid in generality (in particular, every
 \begin{multline}	
 	\langle  T[\phi(x_1)\cdots \phi(x_n)] \rangle\equiv\\ \lim_{T\rightarrow \infty(1-i\epsilon)} \frac{\int \mathcal{D}\phi \, \phi(x_1)\cdots \phi(x_n)e^{i\int_{-T}^T d^4x\, \mathcal{L}}}{\int \mathcal{D}\phi\, e^{i\int_{-T}^T d^4x\, \mathcal{L}}}.
 \end{multline} 
-Before such a path integral can be evaluated --- or even approximated --- it is generally necessary to \emph{regulate} the theory by applying a cutoff $\Lambda$. Now, in the context of tensor networks and quantum information, the most natural regulator is the lattice, with lattice spacing $a = \frac{1}{\Lambda}$, and we don't hesitate to use it throughout. In this way we discretise our continuous field(s) $\phi(x)$ onto the integer lattice $a\mathbb{Z}^{D+1}$; we restrict our coordinates to lattice points $x_\mu = an_\mu$, $n_\mu \in \mathbb{Z}^{D+1}$. Write the field evaluated at lattice points as $\phi_{n_{\mu}} = \phi(x_\mu)$; thus we discretise derivatives as $\partial_\mu \phi(x_\nu) \mapsto (\phi_{n_\nu + e_{\mu}} - \phi_{n_\nu})/a$,   where $e_\mu$ is the unit lattice vector in the direction $\mu$. Thus our potentially ill-defined path integral is replaced, after discretisation, by the better-behaved iterated integral
+Before such a path integral can be evaluated --- or even approximated --- it is generally necessary to \emph{regulate} the theory by applying a cutoff $\Lambda$. Now, in the context of tensor networks and quantum information, the most natural regulator is the lattice, with lattice spacing $a = \frac{1}{\Lambda}$, and we don't hesitate to use it throughout. In this way we discretise our continuous field(s) $\phi(x)$ onto the integer lattice $a\mathbb{Z}^{D+1}$; we restrict our coordinates to lattice points $x = an$, $n \in \mathbb{Z}^{D+1}$. Write the field evaluated at lattice points as $\phi_{n} = \phi(x)$; thus we discretise derivatives as $\partial_\mu \phi(x) \mapsto (\phi_{n + e_{\mu}} - \phi_{n})/a$,   where $e_\mu$ is the unit lattice vector in the direction $\mu$. Thus our potentially ill-defined path integral is replaced, after discretisation, by the better-behaved iterated integral
 \begin{equation}
 	\int \mathcal{D}\phi \mapsto \int [d\phi] \equiv \int \left(\prod_{n\in\mathbb{Z}^{D+1}} d\phi_n \right).
 \end{equation}
@@ -252,14 +252,14 @@ We hence obtain
 \end{equation}
 
 This construction is easily extended to encode imaginary time path integrals. As long as the action is real valued the above construction goes through unmodified: when we apply the procedure described here to a Wick-rotated path integral we obtain the following state of a lattice of a $(D+1)$-dimensional spatial lattice of harmonic oscillators 
-\begin{equation}
+\begin{equation}\label{eq:qls}
 	|\Phi\rangle \equiv \frac{1}{\mathcal{Z}}\int [d\phi] \,e^{-\frac{1}{2}S[\phi]}  |\boldsymbol{\phi}\rangle,
 \end{equation}
 where
 \begin{equation}
-	|\boldsymbol{\phi}\rangle \equiv \bigotimes_{x_\mu\in a\mathbb{Z}^{D+1}} |\phi(x_\mu)\rangle,
+	|\boldsymbol{\phi}\rangle \equiv \bigotimes_{x\in a\mathbb{Z}^{D+1}} |\phi(x)\rangle,
 \end{equation}
-and $|\phi(x)\rangle$ is an improper \emph{position eigenstate} of the harmonic oscillator for site $x_\mu$ localised at the harmonic oscillator position $\phi(x_\mu)$. We can obtain this state by applying the (exponential of the) operator 
+and $|\phi(x)\rangle$ is an improper \emph{position eigenstate} of the harmonic oscillator for site $x$ localised at the harmonic oscillator position $\phi(x)$. We can obtain this state by applying the (exponential of the) operator 
 \begin{equation}
 	\widehat{S} \equiv \frac{a^{D-1}}{2}\sum_{\langle m,n\rangle} (\widehat{\phi}_m-\widehat{\phi}_n)^2 + a^{D+1}\sum_{n} \frac{m^2}{2}\widehat{\phi}_n^2 + \frac{\lambda}{4!} \widehat{\phi}_n^4,
 \end{equation}
@@ -269,7 +269,7 @@ with
 \end{equation}
 to the \emph{momentum-zero} state
 \begin{equation}
-	|\Omega\rangle \equiv \bigotimes_{x_\mu\in a\mathbb{Z}^{D+1}} |\omega\rangle,
+	|\Omega\rangle \equiv \bigotimes_{x\in a\mathbb{Z}^{D+1}} |\omega\rangle,
 \end{equation}
 where
 \begin{equation}
@@ -305,21 +305,40 @@ The pure state Eq.~(\ref{eq:pipurestate}) is perfect for approximation via tenso
 
 
 \section{Parent hamiltonians and convex sets}
-Remarkably, we can also realise $|\Phi\rangle$ as the \emph{ground state} of a natural hamiltonian \cite{ardonne:2004a, verstraete:2006a, perez-garcia:2008a, horava:2008a}. The key to this construction is to introduce a reversible markov chain $M$ which has $p_j \equiv  e^{-E_j}/\mathcal{Z}$ as its stationary distribution \cite{norris:1997a}, i.e., $\sum_{j=1}^N p_jM_{jk} = p_k$, $\forall k$. Reversibility is the condition that $p_j M_{jk} = p_kM_{kj}$, $\forall j,k$. This motivates us to introduce the  matrix $K$ with matrix elements:
+Remarkably, we can also realise $|\Phi\rangle$ as the \emph{ground state} of a natural hamiltonian \cite{ardonne:2004a, verstraete:2006a, perez-garcia:2008a, horava:2008a}. The key to this construction is to introduce a reversible markov chain $M$ which has $p_x \equiv  e^{-E(x)}/\mathcal{Z}$ as its stationary distribution \cite{norris:1997a}, i.e., $\sum_{x=1}^N p_xM_{xy} = p_y$, $\forall y$. Reversibility is the condition that $p_x M_{xy} = p_yM_{yx}$, $\forall x,y$. This motivates us to introduce the  matrix $K$ with matrix elements:
 \begin{equation}
-	K_{jk} \equiv \sqrt{p_j} M_{jk} \frac{1}{\sqrt{p_k}}.
+	K_{xy} \equiv \sqrt{p_x} M_{xy} \frac{1}{\sqrt{p_y}}.
 \end{equation}
-Because of the reversibility condition we find that $K$ is real and symmetric, i.e., hermitian. Further, we have that operator $\widehat{K} \equiv  \sum_{j,k=1}^N K_{jk}|k\rangle \langle j|$ has $|\Phi\rangle$ as an eigenvector corresponding to its largest eigenvalue. We obtain our desired hamiltonian by writing $\widehat{H} \equiv \mathbb{I} - \widehat{K}$, this operator has $|\Phi\rangle$ as a ground state with eigenvalue $0$.
+Because of the reversibility condition we find that $K$ is real and symmetric, i.e., hermitian. Further, we have that operator $\widehat{K} \equiv  \sum_{x,y=1}^N K_{xy}|y\rangle \langle x|$ has $|\Phi\rangle$ as an eigenvector corresponding to its largest eigenvalue. We obtain our desired hamiltonian by writing $\widehat{H} \equiv \mathbb{I} - \widehat{K}$, this operator has $|\Phi\rangle$ as a ground state with eigenvalue $0$.
 
-Given a probability distribution of exponential form, i.e., $p_j \equiv  e^{-E_j}/\mathcal{Z}$, $j=1, 2, \ldots, N$, there is a special reversible Markov chain having $p_j$ as its stationary distribution, namely, the Metropolis algorithm \cite{metropolis:1953a}. To define this Markov chain we introduce the quantity
+Given a probability distribution of exponential form, i.e., $p_x \equiv  e^{-E(x)}/\mathcal{Z}$, $x=1, 2, \ldots, N$, there is a special reversible Markov chain having $p_j$ as its stationary distribution, namely, the Metropolis algorithm \cite{metropolis:1953a}. 
 \begin{equation}
-	c_{jk} \equiv \min\{1, e^{-E_j+E_k}\}.
+	M_{xy} \equiv P(y|x),
 \end{equation}
-Let $F$ be a \emph{flip operator} which flips classical configurations, i.e.\ a permutation of $j=1, 2, \ldots, N$. We then use the flip operator to construct
+where
 \begin{equation}
-	\widehat{M} = \sum_{j\not=k} c_{jk}\langle j|F|k\rangle |j\rangle \langle k| + \sum_{j} |j\rangle \langle j|.
-\end{equation} 
+	P(y|x) \equiv \begin{cases} 1 - \sum_{y\not = x} p(y|x) &\quad y=x \\
+	p(y|x) &\quad y \not= x,\end{cases}
+\end{equation}
+with
+\begin{equation}
+	p(y|x) \equiv  \min\left\{f(y|x), f(x|y)e^{-\beta (E(y)-E(x))}\right\},
+\end{equation}
+and we've introduced a \emph{flip process} with transition probabilities $f(y|x)$ inducing transitions between the states of the system.
 
+We now make a judicious choice of flip process to arrive at a \emph{local hamiltonian} having the quantum lifschitz state $|\Phi\rangle$ in Eq.~(\ref{eq:qls}) as its ground state. 
+
+Suppose that 
+\begin{equation}
+	F_{x} = \int [d\phi d\phi']\, f_x(\phi'|\phi) |\phi'\rangle\langle \phi|,
+\end{equation}
+$x \in a\mathbb{Z}^{D+1}$ is a \emph{local flip operator}, i.e., an operator whose support is restricted to site $x$: $\supp(F_x) = \{x\}$. This means that the flip probability $f_x(\phi'|\phi)$ is zero if $\phi$ and $\phi'$ differ on any site $y\not=x$, i.e., $f_x(\phi'|\phi)$ can only be nonzero if $\phi$ and $\phi'$ differ \emph{at most} on site $x$.
+
+We then claim that the operator $\widehat{K}_x$ resulting from the above construction has support $\supp(\widehat{K}_x) \subset \{x,x  \pm ae_{1}, x \pm ae_{2}, \ldots, x  \pm ae_{D+1}\}$. This follows from noting, first, that 
+\begin{equation}
+	p(\phi'|\phi) \equiv  \min\left\{f_x(\phi'|\phi), f_x(\phi'|\phi)e^{- \frac12 (S(\phi')-S(\phi))}\right\}
+\end{equation}
+inherits a locality property from $f_x(\phi'|\phi)$: it depends on, at most, the values of the configurations $\phi_y$ in a neighbourhood of sites of (lattice) radius $1$ around $x$, i.e., on those sites $y$ with $d(x,y) \le 1$. Thus we deduce that the transition probabilities $P_x(\phi'|\phi)$ arising from $p_x(\phi'|\phi)$ yield a markov matrix $M$ with $\supp(M) \subset \{x,x  \pm ae_{1}, x \pm ae_{2}, \ldots, x  \pm ae_{D+1}\}$.
 
 
 \section{Reflection positivity and analytic continuation}
@@ -354,25 +373,25 @@ We now check that this markov chain indeed has the gibbs distribution as its fix
 		&= e^{-\beta E(y)}.
  	\end{split}
 \end{equation}
-The markov matrix for the metropolis algorithm has matrix elements
+The markov matrix for the Metropolis algorithm has matrix elements
 \begin{equation}
 	M_{xy} \equiv P(y|x).
 \end{equation}
 
-\subsection{Parent hamiltonians via the metropolis hamiltonian}
+\subsection{Parent hamiltonians via the Metropolis hamiltonian}
 The Lifschitz state for $H$ is given by
 \begin{equation}
 	|\Phi\rangle \equiv \sum_{x=1}^N e^{-\frac12E(x)}|x\rangle/\sqrt{\mathcal{Z}}.
 \end{equation}
 (We assume that the eigenvalues $E(x)$ of $H$ are arranged in increasing order.)
 
-Using the markov matrix $M$ for the metropolis algorithm we build the $K$ operator
+Using the markov matrix $M$ for the Metropolis algorithm we build the $K$ operator
 \begin{equation}
 	\widehat{K} \equiv \sum_{x,y=1}^N e^{-\frac{\beta}{2}(E(x)-E(y))} P(y|x) |y\rangle\langle x|.
 \end{equation}
 
 
-\subsection{Parent hamiltonians via generalised metropolis operators}
+\subsection{Parent hamiltonians via generalised Metropolis operators}
 In this subsection we describe an alternative procedure to directly construct parent hamiltonians. The idea here is to exploit the representation of the Lifschitz state as
 \begin{equation}
 	|\phi\rangle \propto e^{-\frac{\beta}{2} H}|+\rangle,
