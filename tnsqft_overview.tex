@@ -305,6 +305,8 @@ The pure state Eq.~(\ref{eq:pipurestate}) is perfect for approximation via tenso
 
 
 \section{Parent hamiltonians and convex sets}
+
+\subsection{Parent hamiltonians}
 Remarkably, we can also realise $|\Phi\rangle$ as the \emph{ground state} of a natural hamiltonian \cite{ardonne:2004a, verstraete:2006a, perez-garcia:2008a, horava:2008a}. The key to this construction is to introduce a reversible markov chain $M$ which has $p_x \equiv  e^{-E(x)}/\mathcal{Z}$ as its stationary distribution \cite{norris:1997a}, i.e., $\sum_{x=1}^N p_xM_{xy} = p_y$, $\forall y$. Reversibility is the condition that $p_x M_{xy} = p_yM_{yx}$, $\forall x,y$. This motivates us to introduce the  matrix $K$ with matrix elements:
 \begin{equation}
 	K_{xy} \equiv \sqrt{p_x} M_{xy} \frac{1}{\sqrt{p_y}}.
@@ -339,6 +341,25 @@ We then claim that the operator $\widehat{K}_x$ resulting from the above constru
 	p(\phi'|\phi) \equiv  \min\left\{f_x(\phi'|\phi), f_x(\phi'|\phi)e^{- \frac12 (S(\phi')-S(\phi))}\right\}
 \end{equation}
 inherits a locality property from $f_x(\phi'|\phi)$: it depends on, at most, the values of the configurations $\phi_y$ in a neighbourhood of sites of (lattice) radius $1$ around $x$, i.e., on those sites $y$ with $d(x,y) \le 1$. Thus we deduce that the transition probabilities $P_x(\phi'|\phi)$ arising from $p_x(\phi'|\phi)$ yield a markov matrix $M$ with $\supp(M) \subset \{x,x  \pm ae_{1}, x \pm ae_{2}, \ldots, x  \pm ae_{D+1}\}$.
+
+An alternative construction of a parent hamiltonian follows from the observation that $e^{\frac12 \widehat{S}}|\Phi\rangle \propto |\Omega\rangle$. We use the fact that we can easily construct a local parent hamiltonian for the momentum state $|\Omega\rangle$, e.g., 
+\begin{equation}
+	\widehat{\pi}_n^2, \quad n\in \mathbb{Z}^{D+1},
+\end{equation}
+does a good job, to construct the local operator
+\begin{equation}
+	\widehat{k}_n \equiv e^{-\frac12\widehat{S}} (\widehat{\pi}_n^2) e^{\frac12\widehat{S}}.
+\end{equation}	
+Using the nonhermitian operator $\widehat{k}_n$ we then obtain a local parent hamiltonian via
+\begin{equation}
+	\widehat{H} \equiv \sum_{n} |\widehat{k}_n|,
+\end{equation}
+where $|M| \equiv \sqrt{M^\dag M}$. 
+
+\subsection{The space of reduced density operators}
+The ground states of local hamiltonians are extremal objects with a remarkable and deep structure that we are only now beginning to uncover. In this subsection we apply some of the insights obtained in quantum-information inspired studies of the ground-state physics of many particle systems to deduce some striking observations concerning the quantum Lifschitz state and the structure of scattering amplitudes. 
+
+A simple argument \cite{verstraete:2005a}, somewhat analogous to the Kohn-Sham theorem \cite{hohenberg:1964a,kohn:1965a}, exposes an intriguing structure in the correlations of ground states of local hamiltonians.
 
 
 \section{Reflection positivity and analytic continuation}
