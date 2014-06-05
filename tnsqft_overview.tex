@@ -299,7 +299,9 @@ It is now possible to generalise the construction above to construct quantum ope
 \end{equation}
 The auxiliary spin here is thought of as indicating the arrow of time.
 
-The pure state Eq.~(\ref{eq:pipurestate}) is perfect for approximation via tensor network states. Indeed, we will go further: the principle contribution of this project is to promote tensor networks of the form Eq.~(\ref{eq:pipurestate}) to the status of a \emph{definition} for a class of path integrals. The justification of this idea will take us on a long journey.
+The pure states Eq.~(\ref{eq:qls}) and Eq.~(\ref{eq:pipurestate}) are perfect for approximation via tensor network states. However, the state Eq.~(\ref{eq:pipurestate}) does not lend itself so directly to the conclusions of the next section. This can be repaired by introducing one auxiliary quantum spin per edge of the lattice to indicate the arrow of time for each edge, but the resulting construction is somewhat unwieldy. We prefer, instead, to focus on the quantum Lifschitz state Eq.~(\ref{eq:qls}) and deduce statements about the real-time path integral via Wick rotation. (I.e., in the language of constructive quantum field theory we will study the Schwinger functions instead of the Wightman functions.)
+
+Indeed, we will go further: the principle contribution of this project is to promote tensor networks of the form Eq.~(\ref{eq:pipurestate}) to the status of a \emph{definition} for a class of path integrals. The justification of this idea will take us on a long journey.
 
 
 
@@ -350,7 +352,7 @@ does a good job, to construct the local operator
 \begin{equation}
 	\widehat{k}_n \equiv e^{-\frac12\widehat{S}} (\widehat{\pi}_n^2) e^{\frac12\widehat{S}}.
 \end{equation}	
-Using the nonhermitian operator $\widehat{k}_n$ we then obtain a local parent hamiltonian via
+Using the nonhermitian operator $\widehat{k}_n$ we then obtain a local parent hamiltonian via, e.g.,
 \begin{equation}
 	\widehat{H} \equiv \sum_{n} |\widehat{k}_n|,
 \end{equation}
@@ -359,8 +361,23 @@ where $|M| \equiv \sqrt{M^\dag M}$.
 \subsection{The space of reduced density operators}
 The ground states of local hamiltonians are extremal objects with a remarkable and deep structure that we are only now beginning to uncover. In this subsection we apply some of the insights obtained in quantum-information inspired studies of the ground-state physics of many particle systems to deduce some striking observations concerning the quantum Lifschitz state and the structure of scattering amplitudes. 
 
-A simple argument \cite{verstraete:2005a}, somewhat analogous to the Kohn-Sham theorem \cite{hohenberg:1964a,kohn:1965a}, exposes an intriguing structure in the correlations of ground states of local hamiltonians.
+A simple argument \cite{verstraete:2005a}, somewhat analogous to the Kohn-Sham theorem \cite{hohenberg:1964a,kohn:1965a}, exposes an intriguing connection between the correlations of ground states of local  hamiltonians and the geometric properties of a \emph{universal} convex set. We summarise the argument for a chain of quantum spins (spin-$1/2$ degrees of freedom). Write $\mathcal{C}_{\text{TI}}$ for the \emph{convex} set of \emph{all} translation-invariant (both pure and mixed) states of the chain. Suppose that $H = \sum_{j\in\mathbb{Z}} h_{j,j+1}$ is a local hamiltonian for the chain, where $h_{j,j+1}$ acts nontrivially on only pairs of spins $\{j,j+1\}$. We immediately deduce that the energy density $\langle e \rangle$ of $H$ for some state $\omega\in \mathcal{C}_{\text{TI}}$ is a function only of the two-site reduced density operator, i.e., 
+\begin{equation}
+	\langle e \rangle = \tr(\rho_{01} h_{0,1}),
+\end{equation}
+where $\rho_{01} \equiv \tr_{\widehat{01}}(\omega)$ is the reduced density operator for sites $01$. Write $\mathcal{C}_{\text{TI}}(0,1)$ for the compact convex $15$-dimensional set of all such two-particle reduced density operators. Because of the constraints of positivity and translation invariance this set is \emph{not} the same as the set of all two-spin density operators.
 
+The simple observation that the energy density of a state $\omega\in \mathcal{C}_{\text{TI}}$ is a linear function only of the two-site reduced density operator has a remarkable consequence: we can reduce the infinite-dimensional minimisation problem for the ground state of $H$ to a \emph{finite-dimensional} minimisation problem over the set $\mathcal{C}_{\text{TI}}(0,1)$, i.e.,
+\begin{equation}
+	\inf_{\omega\in \mathcal{C}_{\text{TI}}} \langle e \rangle = \min_{\rho_{01}\in \mathcal{C}_{\text{TI}}(0,1)} \tr(\rho_{01} h_{0,1}).
+\end{equation}
+An analogous argument applies to higher-dimensional lattices.
+
+Thus if we could only obtain a compact geometric characterisation of the set $\mathcal{C}_{\text{TI}}(0,1)$ we'd be able to reduce the study of ground-state problems for local hamiltonians to a finite-dimensional computation. This task is deeply nontrivial. Indeed it is not really expected to ever be completed because a compact efficient characterisation of $\mathcal{C}_{\text{TI}}(0,1)$ would have dramatic consequences for computational complexity: it turns out that for sufficiently high-dimensional spins the task of computing the ground-state energy of a (somewhat baroque) translation-invariant spin chain is a computationally hard problem. 
+
+The set $\mathcal{C}_{\text{TI}}(0,1)$ can be approximated in a variety of ways: inner approximations can be easily obtained using a variational ansatz arising from, e.g., mean-field theory. Outer approximations may obtained by relaxing the infinite number of constraints arising from the joint requirements of translation invariance and positivity. 
+
+We now exploit the above observations to argue that the scattering amplitudes for an arbitrary $D+1$ dimensional local quantum field theory are completely determined by the convex set. 
 
 \section{Reflection positivity and analytic continuation}
 
