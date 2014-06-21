@@ -217,7 +217,7 @@ As we saw in the previous section, the Lie-Trotter expansion can be utilised to 
 
 
 \section{Tensor networks from path integrals}
-In this section we describe how to construct a special quantum state, the \emph{quantum Lifschitz state}, which encodes all of the $n$-particle scattering amplitudes for a given quantum (field) theory. This idea traces its origin back at least to the work of Rudolph and Ta-Shma and Aharonov \cite{rudolph:2002a, aharonov:2003a} and has found recent applications by Ardonne in condensed matter theory where it is known as a \emph{quantum Lifschitz theory} \cite{ardonne:2004a}, and later in the study of quantum gravity by Ho\v{r}ava \cite{horava:2009a,horava:2008a}. In contrast to the aforementioned applications in condensed matter theory and quantum gravity we are not proposing the construction of new exactly solvable theories, rather, we exploit the quantum Lifschitz construction to encode the full path integral as a pure quantum state which we then subsequently approximate as a tensor network.
+In this section we describe how to construct a special quantum state, the \emph{quantum Lifschitz state}, which encodes all of the $n$-particle scattering amplitudes for a given quantum (field) theory. This idea traces its origin back at least to the work of Rudolph and Ta-Shma and Aharonov \cite{rudolph:2002a, aharonov:2003a} and has found recent applications by Ardonne in condensed matter theory where it is known as a \emph{quantum Lifschitz theory} \cite{ardonne:2004a}, and later in the study of quantum gravity by Ho\v{r}ava \cite{horava:2009a,horava:2008a}. In contrast to the aforementioned applications in condensed matter theory and quantum gravity we are not proposing new exactly solvable theories, rather, we exploit the quantum Lifschitz construction to encode the full path integral as a pure quantum state which we then subsequently represent as a tensor network. It is worth noting that, in the context of constructive quantum field theory, the quantum Lifschitz state is an encoding of all the \emph{Schwinger functions} of the theory.  
 
 The basic input to any calculation in QFT is the lagrangian $\mathcal{L}$. To keep a concrete example in mind think of $\phi^4$ theory in $D+1$ dimensions:
 \begin{equation}
@@ -379,10 +379,14 @@ The set $\mathcal{C}_{\text{TI}}(0,1)$ can be approximated in a variety of ways:
 
 We now exploit the above observations to argue that the scattering amplitudes for an arbitrary $D+1$ dimensional local quantum field theory are completely determined by the convex set. 
 
-\section{Reflection positivity and analytic continuation}
+\section{Quantum gauge theory}
+In this section we extend the discussion of the previous sections to cover the case of gauge theory. The ideas here exploit the tensor network representation for the gauge-invariant sector developed in the open science project ``Lattice-gauge-theory-and-tensor-networks'' to produce the quantum Lifschitz state for the gauge-unfixed lattice path integral.
+
+\section{The continuum limit}
+The objective this section we combine the techniques developed in both the open science projects ``Lattice-gauge-theory-and-tensor-networks'' and ``Continuous-Limits-of-Quantum-Lattice-Systems'' to produce a quantum Lifschitz for a full quantum gauge theory.
 
 \section{Conclusions}
-The
+
 
 \bibliography{tnspi}
 
