@@ -18,6 +18,18 @@
 \newcommand{\vx}{\ensuremath{\vec{x}}}
 \newcommand{\vk}{\ensuremath{\vec{k}}}
 
+\def\su2{\textsl{SU}(2)}
+\def\o3{\textsl{O}(3)}
+\def\uone{\textsl{U}(1)}
+\def\u2{\textsl{U}(2)}
+\def\CL{\textsl{CL}}
+\def\CR{\textsl{CR}}
+\def\CU{\textsl{CU}}
+\def\CAv{\mathbf{Int}}
+\def\gl2c{\textsl{GL}(2, \mathbb{C})}
+\def\lasu2{\mathfrak{su}(2)}
+\def\lauone{\mathfrak{u}(1)}
+
 \newtheorem{theorem}{Theorem}
 \newtheorem{proposition}{Proposition}
 \newtheorem{lemma}{Lemma}
@@ -381,6 +393,26 @@ We now exploit the above observations to argue that the scattering amplitudes fo
 
 \section{Quantum gauge theory}
 In this section we extend the discussion of the previous sections to cover the case of gauge theory. The ideas here exploit the tensor network representation for the gauge-invariant sector developed in the open science project ``Lattice-gauge-theory-and-tensor-networks'' to produce the quantum Lifschitz state for the gauge-unfixed lattice path integral.
+
+To discuss the construction of a lifshitz state for quantum gauge theory we need to specify our local degrees of freedom: the \emph{local position} degree of freedom is an element of a compact group $G$. The position basis for such a degree of freedom is written as  
+\begin{equation}
+	|U\rangle, \quad U\in G,
+\end{equation}
+with inner product
+\begin{equation}
+	\langle U|V\rangle = \delta(U-V).
+\end{equation}
+Associated with this space is the hilbert space $L^2(G)$ of square integrable functions on a compact lie group $G$ whose elements may be represented as
+\begin{equation}
+	|\psi\rangle = \int dU\, \psi(U)|U\rangle,
+\end{equation}
+where $dU$ is the Haar measure. 
+
+To build the quantum lifschitz state we require a $D+1$-dimensional lattice of these local degrees of freedom, which are then associated with the directed links of the lattice.
+
+The two choices $G=\uone$ and $G=\su2$ exemplify the key differences; the more general case does not require the introduction of many new ideas. 
+
+
 
 \section{The continuum limit}
 The objective this section we combine the techniques developed in both the open science projects ``Lattice-gauge-theory-and-tensor-networks'' and ``Continuous-Limits-of-Quantum-Lattice-Systems'' to produce a quantum Lifschitz for a full quantum gauge theory.
