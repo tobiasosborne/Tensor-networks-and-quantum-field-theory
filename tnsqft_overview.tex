@@ -408,7 +408,7 @@ Associated with this space is the hilbert space $L^2(G)$ of square integrable fu
 \end{equation}
 where $dU$ is the Haar measure. 
 
-To build the quantum lifschitz state we require a $D+1$-dimensional lattice of these local degrees of freedom, which are then associated with the directed links of the lattice.
+To build the quantum lifschitz state we require a $(D+1)$-dimensional lattice of these local degrees of freedom, which are then associated with the directed links of the lattice.
 
 The two choices $G=\uone$ and $G=\su2$ exemplify the key differences; the more general case does not require the introduction of many new ideas. 
 
@@ -416,7 +416,14 @@ Our objective here is to realise the path integral for lattice gauge theory via 
 \begin{equation}
 	|\omega\rangle = \int dU \,|U\rangle.
 \end{equation}
-Using this state we can build the quantum Lifschitz state for an arbitrary nonabelian gauge theory on the lattice.
+Using this state we can build the quantum Lifschitz state for an arbitrary nonabelian gauge theory on the lattice by applying the operator 
+\begin{equation}
+	e^{-\frac12\widehat{S}},
+\end{equation}
+where
+\begin{equation}
+	\widehat{S} = \sum_{e\in E} \widehat{u}_e + 
+\end{equation}
 
 \section{The continuum limit}
 The objective this section we combine the techniques developed in both the open science projects ``Lattice-gauge-theory-and-tensor-networks'' and ``Continuous-Limits-of-Quantum-Lattice-Systems'' to produce a quantum Lifschitz for a full quantum gauge theory.
