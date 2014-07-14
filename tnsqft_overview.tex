@@ -9,6 +9,7 @@
 \usepackage{braket}
 
 \newcommand{\tr}{\operatorname{tr}}
+\newcommand{\real}{\operatorname{Re}}
 \newcommand{\vol}{\operatorname{vol}}
 \newcommand{\supp}{\operatorname{supp}}
 \newcommand{\dist}{\operatorname{dist}}
@@ -412,6 +413,21 @@ To build the quantum lifschitz state we require a $(D+1)$-dimensional lattice of
 
 The two choices $G=\uone$ and $G=\su2$ exemplify the key differences; the more general case does not require the introduction of many new ideas. 
 
+Define the \emph{position observables} $\widehat{u}_{jk}$ via
+\begin{equation}
+	\widehat{u}_{jk}|U\rangle \equiv t_{jk}^{\frac12}(U)|U\rangle \equiv [U]_{jk}|U\rangle,
+\end{equation} 
+for $j,k \in \{-\frac12, \frac12\}$, i.e., $\widehat{u}_{jk}$ simply gives the matrix elements of the spin-$1/2$ defining representation of $U$ (any other representations could be used here). The $2\times 2$ matrix of operators $\widehat{u}_{jk}$ is simply denoted by $\widehat{u}$. Let $\gamma = (e_1,e_2,\ldots,e_n)$ be a \emph{path} in the lattice, i.e., a sequence of edges $e_j$ such that $e_{j+1,-} = e_{j,+}$. We denote by $\widehat{u}_{jk}(\gamma)$ the \emph{Wilson line} observable
+\begin{equation}
+	\widehat{u}_{jk}(\gamma) \equiv \widehat{u}_{j j_1}(e_1)\widehat{u}_{j_1j_2}(e_2)\cdots \widehat{u}_{j_{n-1} k}(e_n),
+\end{equation}
+where $\widehat{u}(e)$ denotes the position observable for link $e$ and repeated indices are summed. In the case where the path $\gamma$ is closed we set $k=j$ and sum over the index $j$; such observables are denoted 
+\begin{equation}
+	\tr(\widehat{u}_{\gamma}) \equiv \sum_{j}\widehat{u}_{j j_1}(e_1)\widehat{u}_{j_1j_2}(e_2)\cdots \widehat{u}_{j_{n-1} j}(e_n),
+\end{equation}
+and are known as \emph{Wilson loops}. We explicitly allow the case where a path visits a given link/edge more than once. In the special case where the path $\gamma$ traverses a \emph{plaquette} or \emph{face} in the clockwise direction we denote the Wilson loop as $\tr(\widehat{u}_{\square})$.
+
+
 Our objective here is to realise the path integral for lattice gauge theory via the quantum Lifschitz state proposal. To this end we first need to identify the initial fiducial state analogous to the momentum-zero state $|\Omega\rangle$. This state is naturally given as tensor produce over the links of the zero-energy eigenstate $|\omega\rangle$ of the local kinetic-energy operator, 
 \begin{equation}
 	|\omega\rangle = \int dU \,|U\rangle.
@@ -422,8 +438,9 @@ Using this state we can build the quantum Lifschitz state for an arbitrary nonab
 \end{equation}
 where
 \begin{equation}
-	\widehat{S} = \sum_{e\in E} \widehat{u}_e + 
+	\widehat{S} = \beta\sum_{\square} \left(1 - \frac{1}{2}\real\tr(\widehat{u}_\square)\right),
 \end{equation}
+and the sum is over all plaquettes of the lattice.
 
 \section{The continuum limit}
 The objective this section we combine the techniques developed in both the open science projects ``Lattice-gauge-theory-and-tensor-networks'' and ``Continuous-Limits-of-Quantum-Lattice-Systems'' to produce a quantum Lifschitz for a full quantum gauge theory.
