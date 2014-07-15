@@ -432,7 +432,7 @@ Our objective here is to realise the path integral for lattice gauge theory via 
 \begin{equation}
 	|\omega\rangle = \int dU \,|U\rangle.
 \end{equation}
-Using this state we can build the quantum Lifschitz state for an arbitrary nonabelian gauge theory on the lattice by applying the operator 
+Using this state we can build the quantum Lifschitz state for an arbitrary nonabelian gauge theory on the lattice by first constructing the operator 
 \begin{equation}
 	e^{-\frac12\widehat{S}},
 \end{equation}
@@ -440,7 +440,11 @@ where
 \begin{equation}
 	\widehat{S} = \beta\sum_{\square} \left(1 - \frac{1}{2}\real\tr(\widehat{u}_\square)\right),
 \end{equation}
-and the sum is over all plaquettes of the lattice.
+and the sum is over all plaquettes of the lattice. The quantum Lifschitz state is then
+\begin{equation}
+	|\Phi\rangle \equiv e^{-\frac12\widehat{S}}|\Omega\rangle.
+\end{equation}
+
 
 \section{The continuum limit}
 The objective this section we combine the techniques developed in both the open science projects ``Lattice-gauge-theory-and-tensor-networks'' and ``Continuous-Limits-of-Quantum-Lattice-Systems'' to produce a quantum Lifschitz for a full quantum gauge theory.
