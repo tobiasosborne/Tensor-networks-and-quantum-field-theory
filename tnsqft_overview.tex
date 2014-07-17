@@ -437,7 +437,7 @@ Using this state we can build the quantum Lifschitz state for an arbitrary nonab
 	e^{-\frac12\widehat{S}},
 \end{equation}
 where
-\begin{equation}
+\begin{equation}\label{eq:lgtaction}
 	\widehat{S} = \beta\sum_{\square} \left(1 - \frac{1}{2}\real\tr(\widehat{u}_\square)\right),
 \end{equation}
 and the sum is over all plaquettes of the lattice. The quantum Lifschitz state is then
@@ -445,6 +445,8 @@ and the sum is over all plaquettes of the lattice. The quantum Lifschitz state i
 	|\Phi\rangle \equiv e^{-\frac12\widehat{S}}|\Omega\rangle. 
 \end{equation}
 The quantum Lifschitz state is exactly gauge invariant because the operator action $\widehat{S}$ is invariant and $|\Omega\rangle$ lies in the gauge-invariant sector. Note that we have not, nor do we need to, fix any gauge. 
+
+We can easily argue, as per the $\phi^4$-theory case, that the quantum Lifschitz state is a tensor network state. Indeed, because each operator in the sum Eq.~(\ref{eq:lgtaction}) commutes with every other the exponential simplifies tremendously and there are only a finite number of tensor legs associated to each link. However, this observation does not directly help us because the bond dimension for the tensor legs is infinite, unless $\beta = 0$. Instead, we need to exploit the freedom we have to modify physics at the UV scale to simplify our representation. We do this in the sequel by replacing our initial tensor network state $|\Omega\rangle$ with another TNS $|\Omega_I\rangle$ built using the interpolation operation introduced in the "Lattice-gauge-theory-and-tensor-networks" project. This state is then argued to give the same IR physics as $|\Omega\rangle$ and, hence, a continuous limit.
 
 \section{The continuum limit}
 The objective this section we combine the techniques developed in both the open science projects ``Lattice-gauge-theory-and-tensor-networks'' and ``Continuous-Limits-of-Quantum-Lattice-Systems'' to produce a quantum Lifschitz for a full quantum gauge theory.
